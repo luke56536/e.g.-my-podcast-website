@@ -3,95 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Podcast</title>
+    <title>Let's Do Crazy Things</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #f4f4f4;
+            background-color: #1a1a1a; /* Dark background */
+            color: #f5f5f5; /* Light text */
         }
         header {
-            background: #333;
-            color: #fff;
-            padding: 10px 0;
+            background: #424242; /* Dark gray */
+            color: #ffe082; /* Light yellow */
+            padding: 20px;
             text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
         h1 {
             margin: 0;
+            font-size: 2.5em;
         }
         .container {
-            max-width: 800px;
-            margin: 20px auto;
-            background: #fff;
+            display: flex;
+            gap: 20px;
+        }
+        .sidebar {
+            width: 200px;
+            background: #2e2e2e; /* Darker gray for sidebar */
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        .menu-icon {
+            cursor: pointer;
+            font-size: 2em;
+            color: #ffe082;
+            margin-bottom: 10px;
+        }
+        .menu {
+            display: none;
+        }
+        .menu a {
+            display: block;
+            padding: 10px;
+            color: #ffe082; /* Light yellow */
+            text-decoration: none;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        .menu a:hover {
+            background: #616161; /* Medium gray on hover */
+        }
+        .main-content {
+            flex-grow: 1;
+            background: #424242; /* Dark gray */
             padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
         iframe {
             width: 100%;
             height: 400px;
             border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
-        .email-form {
-            margin-top: 20px;
-            text-align: center;
+        .description, .merch-content, .about-content {
+            display: none;
+            margin: 20px 0;
         }
-        input[type="email"] {
+        .photos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .photo-container {
+            position: relative;
+            width: calc(33.33% - 10px);
+        }
+        .photo-container img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        .name-box {
+            position: absolute;
+            top: -40px; /* Adjusts the position above the photo */
+            left: 0;
+            right: 0;
             padding: 10px;
-            width: 70%;
-            margin-right: 10px;
-        }
-        input[type="submit"] {
-            padding: 10px 20px;
-            background: #333;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background: #555;
-        }
-        .share-buttons {
-            margin-top: 20px;
             text-align: center;
+            font-weight: bold;
+            color: white;
+            border-radius: 8px;
+        }
+        .name-box1 { background-color: #ff0000; } /* Red */
+        .name-box2 { background-color: #008000; } /* Green */
+        .name-box3 { background-color: #0000ff; } /* Blue */
+        .merch a {
+            padding: 12px 20px;
+            background: #ffcc00; /* Yellow for the button */
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .merch a:hover {
+            background: #ffc107; /* Darker yellow on hover */
         }
         .share-button {
-            margin: 5px;
+            margin-top: 20px;
             padding: 10px 15px;
-            background: #007bff;
+            background: #0077cc; /* Gmail blue */
             color: white;
             text-decoration: none;
             border-radius: 5px;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+        .share-button:hover {
+            background: #005fa3; /* Darker Gmail blue */
         }
     </style>
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function showSection(section) {
+            const sections = ['description', 'about-content', 'merch-content'];
+            sections.forEach(s => {
+                const content = document.querySelector(`.${s}`);
+                content.style.display = s === section ? 'block' : 'none';
+            });
+        }
+
+        // Show the Home section by default
+        window.onload = function() {
+            showSection('description');
+        }
+    </script>
 </head>
 <body>
 
 <header>
-    <h1>My Podcast</h1>
+    <h1>Let's Do Crazy Things</h1>
 </header>
 
 <div class="container">
-    <h2>Latest Episode</h2>
-    <iframe src="https://www.youtube.com/embed/UtqQNo7x1Bk" allowfullscreen></iframe>
-    <h3>Summary:</h3>
-    <p>This is a summary of the latest episode. It discusses various topics and insights. Stay tuned for more!</p>
-
-    <div class="email-form">
-        <h3>Subscribe to our Newsletter</h3>
-        <form action="your-form-handler-url" method="post">
-            <input type="email" name="email" placeholder="Enter your email" required>
-            <input type="submit" value="Subscribe">
-        </form>
+    <div class="sidebar">
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        <div class="menu">
+            <a href="#" onclick="showSection('description')">Home</a>
+            <a href="#" onclick="showSection('about-content')">About</a>
+            <a href="#" onclick="showSection('merch-content')">Merch</a>
+        </div>
     </div>
 
-    <div class="share-buttons">
-        <h3>Share This Episode</h3>
-        <a class="share-button" href="https://twitter.com/intent/tweet?url=https://your-netlify-url.netlify.app&text=Check%20out%20this%20podcast!" target="_blank">Share on Twitter</a>
-        <a class="share-button" href="https://www.facebook.com/sharer/sharer.php?u=https://your-netlify-url.netlify.app" target="_blank">Share on Facebook</a>
-        <a class="share-button" href="https://www.linkedin.com/sharing/share-offsite/?url=https://your-netlify-url.netlify.app" target="_blank">Share on LinkedIn</a>
-        <a class="share-button" href="https://mail.google.com/mail/?view=cm&fs=1&to=&su=Check%20out%20this%20podcast&body=I%20thought%20you%20might%20enjoy%20this%20podcast:%20https://your-netlify-url.netlify.app" target="_blank">Share via Gmail</a>
+    <div class="main-content">
+        <div class="description">
+            <h2>Welcome to My Channel!</h2>
+            <iframe src="https://www.youtube.com/embed/yVVNJdTgOGg" allowfullscreen></iframe>
+            <p>Welcome to "Let's Do Crazy Things"! Join us as we explore the wild and fun world of pets and all things crazy. From hilarious pet antics to unexpected adventures, there's always something new and exciting. Subscribe now to be part of the fun!</p>
+        </div>
+
+        <div class="about-content">
+            <h3>About</h3>
+            <div class="photos">
+                <div class="photo-container">
+                    <div class="name-box name-box1">Lacy</div>
+                    <img src="https://yt3.ggpht.com/pyliHYo7vg09piL7RT8M9ejJqZDfCsaY7t7D5pVuIZVlKhHWyuagFU7qWGavAb8e0H2RcsqFWNtd=s640-rw-nd-v1" alt="Photo 1">
+                </div>
+                <div class="photo-container">
+                    <div class="name-box name-box2">Bailey</div>
+                    <img src="https://yt3.ggpht.com/wVAeJA7uKB3it1ZQ6HxHYuuwDRylMbTrrudNCcth5ZghUlcQSPohARplYbcVqLwTlXtzn8GSUJWV=s800-rw-nd-v1" alt="Photo 2">
+                </div>
+                <div class="photo-container">
+                    <div class="name-box name-box3">Chloe</div>
+                    <img src="https://yt3.ggpht.com/qN-QoclQ0vVgScckbRfwLDOB3QbkAYuQZNA957T7zU-JKQEEpDvAJQbvN2-sByNx4plQj1z_rJhY=s1024-rw-nd-v1" alt="Photo 3">
+                </div>
+            </div>
+            <a class="share-button" href="https://mail.google.com/mail/?view=cm&fs=1&to=&su=Check%20out%20this%20channel&body=Hey%20check%20out%20this%20awesome%20channel%20Let's%20Do%20Crazy%20Things!%20Here's%20the%20link:%20YOUR_WEBSITE_URL" target="_blank">Share on Gmail</a>
+        </div>
+
+        <div class="merch-content">
+            <h3>Check Out Our Merch</h3>
+            <p>Get your favorite merch now!</p>
+            <a href="https://www.ebay.com/itm/175787132401?chn=ps&_trkparms=ispr%3D1" target="_blank">Buy Merch</a>
+        </div>
     </div>
 </div>
 
